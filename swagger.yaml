@@ -1,0 +1,117 @@
+openapi: 3.0.0
+info:
+  version: '2.0.0'
+  title: 'API Documentation for Newz'
+  description: 'Dokumentasi API untuk keperluan Newz versi 2'
+tags:
+  - name: Client
+    description: client only endpoints
+  - name: Visitor
+    description: vicitor only endpoints
+
+paths:
+  /serviceinfo:
+    get:
+      tags: 
+        - Client
+      summary: Service Info for check stacks ready to use
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: '#/components/schemas/serverReadyResponse'
+        '401':
+          description: Unauthorized
+        '422':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: '#/components/schemas/ErrorResponse'
+  
+      
+components:
+  parameters:
+    token:
+      required: true
+      in: header
+      name: Authorization
+      schema:
+        type: string
+      description: JWT bearer token basic auth
+      example: >-
+        Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+  schemas:
+    serverReadyResponse:
+      properties:
+        time:
+          type: string
+          example: "2019-12-18T21:09:27"
+        database:
+          type: boolean
+          example: true
+        mongo:
+          type: boolean
+          example: true
+        elastic:
+          type: boolean
+          example: true
+        redis:
+          type: boolean
+          example: true
+          
+    ErrorResponse:
+      type: object
+      properties:
+        details:
+          type: object
+        message:
+          type: string
+          example: this is your error message
+    NotFoundResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Not Found"
+    Unauthorized:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "invalid or expired jwt"
+    Forbidden:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "invalid role"
+    PagedModel:
+      properties:
+        total_page:
+          type: number
+          example: 5
+        current_page:
+          type: number
+          example: 1
+        total:
+          type: number
+          example: 25
+        per_page:
+          type: number
+          example: 5
+    

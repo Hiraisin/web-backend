@@ -1,7 +1,7 @@
 package router
 
 import (
-	"../handlers"
+	"web-backend-patal/handlers"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"

@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"../config"
+	"web-backend-patal/config"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo"

@@ -3,8 +3,9 @@ package main
 import (
 	"os"
 
-	"../config"
-	"../router"
+	"web-backend-patal/config"
+
+	"web-backend-patal/router"
 
 	"github.com/labstack/echo/middleware"
 )

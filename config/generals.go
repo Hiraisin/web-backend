@@ -2,7 +2,6 @@ package config
 
 import (
 	"crypto/sha1"
-	"encoding/json"
 	"fmt"
 	"io"
 	"math/rand"
@@ -81,15 +80,6 @@ func Encrypt(text string) string {
 	sha.Write([]byte(text))
 	var encrypted = sha.Sum(nil)
 	return fmt.Sprintf("%x", encrypted)
-}
-
-func RedisSet(key string, value interface{}) error {
-
-	Redis := App.Redis
-	data, _ := json.Marshal(value)
-	err := Redis.Set(key, data, time.Minute*5).Err()
-
-	return err
 }
 
 func Upload(c echo.Context, prefix string, userID string) (string, error) {

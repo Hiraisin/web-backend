@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"../validator"
+	"web-backend-patal/validator"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/jinzhu/gorm"

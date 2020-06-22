@@ -1,7 +1,7 @@
 package models
 
 import (
-	basemodel "../config"
+	basemodel "web-backend-patal/config"
 )
 
 type (

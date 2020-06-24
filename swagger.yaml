@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
   version: '2.0.0'
-  title: 'API Documentation for Newz'
-  description: 'Dokumentasi API untuk keperluan Newz versi 2'
+  title: 'API Documentation for Palembang Digital'
+  description: 'Dokumentasi API untuk keperluan Web Palembang Digital'
 tags:
   - name: Client
     description: client only endpoints

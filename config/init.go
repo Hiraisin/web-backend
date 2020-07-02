@@ -82,18 +82,13 @@ func (x *Application) LoadConfigs() error {
 func (x *Application) DBinit() error {
 	dbconf := x.Config.GetStringMap(fmt.Sprintf("database"))
 	Cons := DBConfig{
-		Adapter:        MysqlAdapter,
-		Host:           dbconf["host"].(string),
-		Port:           dbconf["port"].(string),
-		Username:       dbconf["username"].(string),
-		Password:       dbconf["password"].(string),
-		Table:          dbconf["table"].(string),
-		Timezone:       dbconf["timezone"].(string),
-		Maxlifetime:    dbconf["maxlifetime"].(int),
-		IdleConnection: dbconf["idle_conns"].(int),
-		OpenConnection: dbconf["open_conns"].(int),
-		SSL:            dbconf["sslmode"].(string),
-		Logmode:        dbconf["logmode"].(bool),
+		Adapter:  PostgresAdapter,
+		Host:     dbconf["host"].(string),
+		Port:     dbconf["port"].(string),
+		Username: dbconf["username"].(string),
+		Password: dbconf["password"].(string),
+		Database: dbconf["database"].(string),
+		SSL:      dbconf["sslmode"].(string),
 	}
 	Start(Cons)
 	x.DB = DB

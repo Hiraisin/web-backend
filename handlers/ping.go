@@ -7,8 +7,7 @@ import (
 
 	"web-backend-patal/config"
 
-	"github.com/jinzhu/gorm"
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 )
 
 // Info main type
@@ -29,18 +28,13 @@ func ServiceInfo(c echo.Context) error {
 	info.Time = fmt.Sprintf("%v", time.Now().Format("2006-01-02T15:04:05"))
 	info.DB = true
 
-	if err = healthcheckDB(); err != nil {
+	if err = pingDB(); err != nil {
 		info.DB = false
 	}
 
 	return c.JSON(http.StatusOK, info)
 }
 
-func healthcheckDB() (err error) {
-	dbconf := config.App.Config.GetStringMap("database")
-	connectionString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true&loc=Local", dbconf["username"].(string), dbconf["password"].(string), dbconf["host"].(string), dbconf["port"].(string), dbconf["table"].(string))
-
-	db, err := gorm.Open("mysql", connectionString)
-	defer db.Close()
-	return err
+func pingDB() (err error) {
+	return config.App.DB.DB().Ping()
 }
